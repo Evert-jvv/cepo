@@ -1,0 +1,41 @@
+The **SGI-EHA** (Information Management System for Water, Hygiene, and Sanitation) is a unified national digital platform designed to coordinate the WASH sector in the DRC, track investments, and support regulatory oversight. The required architecture is a **modular microservices model** centered around a central **nucleus (noyau)** that interacts with various functional components through standardized APIs.
+
+Below is an overview of the system’s primary components and the architectural framework required to deliver them:
+
+### **1. The Core Architectural Framework: The "Noyau"**
+The system must be built on a **hub-and-spoke model** where a central nucleus serves as the orchestration layer.
+*   **Interconnection Hub:** The nucleus is "constituted of APIs" that manage the interaction between the core system and individual microservices.
+*   **Internal API Standards:** All internal and external communication must adhere to **REST/JSON standards**.
+*   **Asynchronous Capability:** The architecture must support both **synchronous and asynchronous communication modes** for every internal microservice to ensure system resilience.
+*   **Independence:** Each microservice should support an **independent deployment mode** to allow for updates without affecting the core nucleus.
+
+### **2. Functional Microservices (Business Modules)**
+The system is divided into specific functional modules that can be activated or improved independently:
+*   **Water & Infrastructure Modules:** Tracking drinking water points, production quantities, and network technical characteristics.
+*   **Sanitation & Hygiene Modules:** Managing liquid waste, fecal sludge treatment sites, and community hygiene behavior data (e.g., FDAL/ODF status).
+*   **Project Portfolio Module:** A specialized component for tracking the **physical, financial, and institutional progress** of national WASH projects.
+*   **Regulation & Operator Module:** Tools for **benchmarking service provider performance**, managing concessions, and executing regulatory analysis for the ARSPE.
+*   **Finance & Billing Module:** Handling sector-specific taxes, fees, and generating automated receipts and financial reports for operators.
+
+### **3. Specialized Analytical & Integration Components**
+*   **GIS Module (Geoportal):** A native **PostGIS** integration supporting **OGC standards (WMS/WFS/WMTS)** and **ISO 19115 metadata** for spatial analysis and mapping of water points.
+*   **BI & Reporting Module:** An automated engine for generating real-time dashboards and periodic reports aligned with national and SDG indicators.
+*   **External Integration Layer:** Permanent Push/Pull APIs to synchronize data with **mWater** (for technical infrastructure) and **DHIS2** (for health-related waterborne disease data).
+*   **Community Alert System:** A public-facing interface for citizens to report leaks, water quality issues, or sanitation facility failures.
+
+### **4. User Interfaces and Field Tools**
+*   **Web Portal:** A responsive interface for national and provincial stakeholders, aligned with the **DRC government’s graphic charter**.
+*   **Offline-First Mobile App:** A critical field tool that functions **fully in offline mode**, supporting automatic background synchronization once a connection is re-established.
+
+### **5. Security and Sovereignty Infrastructure**
+*   **National Hosting:** In compliance with DRC law, the primary system and databases must be **hosted locally in the DRC** to ensure digital sovereignty.
+*   **Disaster Recovery:** A secondary **cloud-based replication** environment is required for automated, encrypted backups.
+*   **AI-Enhanced Cybersecurity:** The system must include a **Web Application Firewall (WAF)** and **Intrusion Detection System (IDS)** using machine learning, alongside an **AI assistant** for log analysis and disaster recovery diagnostics.
+*   **Access Control:** Mandatory **Multi-Factor Authentication (MFA)** and a robust **Role-Based Access Control (RBAC)** system.
+
+### **6. Performance Requirements for the Architecture**
+To ensure a successful delivery, the developed architecture must meet the following technical benchmarks:
+*   **API Response Time:** $\leq$ 800 milliseconds.
+*   **Module Loading Latency:** $\leq$ 1.2 seconds.
+*   **Capacity:** Support for at least **500 simultaneous active users**.
+*   **Reliability:** **99.5% monthly availability** and a minimum bandwidth tolerance of **128 kbps**.
